@@ -124,3 +124,61 @@ $keytool -printcert -v -file ca-certificates.crt
 
 
 
+##### 查看带宽占用
+
+$ iftop -P
+
+-P 选项会在iftop 的输出结果中开启端口显示
+
+界面上面显示的是类似刻度尺的刻度范围，为显示流量图形的长条作标尺用的。
+
+中间的这两个左右箭头，表示的是流量的方向。
+
+TX：发送流量
+
+RX：接收流量
+
+TOTAL：总流量
+
+Cumm：运行iftop到目前时间的总流量
+
+peak：流量峰值
+
+rates：分别表示过去 2s 10s 40s 的平均流量
+
+
+
+要找到运行在该端口的进程，那么可以用netstat 或者lsof 来找到相应的进程。
+
+使用netstat 命令来找到运行在10910这个端口上的进程：
+
+\# netstat -tunp | grep 10910
+
+可以使用lsof 命令来找到运行在10909这个端口上的进程：
+
+\# lsof -i:10909：
+
+
+
+#### 创建用户
+
+```adduser sr```
+
+mkdir /home/sr
+
+mkdir -p /home/sr/.ssh
+
+vim /home/sr/.ssh/authorized_keys
+
+passwd sr
+
+su sr
+
+chmod +w /etc/sudoers
+
+vim /etc/sudoers
+
+chmod -w /etc/sudoers
+
+shown -R xxx:xxx /home/xxx
+
